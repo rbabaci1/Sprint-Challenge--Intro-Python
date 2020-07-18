@@ -23,19 +23,9 @@ class City:
 # Note that the first line of the CSV is header that describes the fields--this
 # should not be loaded into a City object.
 cities = []
-header = ["name", "state_name", "county_name", "lat", "lon",
-          "population", "density", "timezone", "zips"]
-formatedCities = []
 
 
-def formatCity(city):
-    temp = {}
-    for i, c in enumerate(city):
-        temp[header[i]] = c
-    formatedCities.append(temp)
-
-
-def getLowLatHighLon(lat1, lon1, lat2, lon2):
+def sortInputs(lat1, lon1, lat2, lon2):
     lats = sorted([lat1, lat2])
     lons = sorted([lon1, lon2])
     return lats + lons
@@ -50,11 +40,8 @@ def cityreader(cities=[]):
         csvreader = csv.reader(csvfile)
         next(csvreader)
 
-        for i, city in enumerate(csvreader):
-            formatCity(city)
-            name, lat, lon = formatedCities[i]["name"], float(
-                formatedCities[i]["lat"]), float(formatedCities[i]["lon"])
-            cities.append(City(name, lat, lon))
+        for c in csvreader:
+            cities.append(City(c[0], float(c[3]), float(c[4])))
     return cities
 
 
@@ -100,14 +87,13 @@ point2 = input("Enter lat2,lon2:\n>>> ").split(",")
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
     within = []
-    lat1, lat2, lon1, lon2 = getLowLatHighLon(
+    lat1, lat2, lon1, lon2 = sortInputs(
         abs(lat1), abs(lon1), abs(lat2), abs(lon2))
     # Go through each city and check to see if it falls within
     # the specified coordinates.
     for city in cities:
         if lat1 <= abs(city.lat) <= lat2 and lon1 <= abs(city.lon) <= lon2:
-            within.append(f"{city.name}: ({city.lat, city.lon})")
-
+            within.append(f"{city.name}: {city.lat, city.lon}")
     return within
 
 
