@@ -23,6 +23,16 @@ class City:
 # Note that the first line of the CSV is header that describes the fields--this
 # should not be loaded into a City object.
 cities = []
+header = ["name", "state_name", "county_name", "lat", "lon",
+          "population", "density", "timezone", "zips"]
+formatedCities = []
+
+
+def formatCity(city):
+    temp = {}
+    for i, c in enumerate(city):
+        temp[header[i]] = c
+    formatedCities.append(temp)
 
 
 def cityreader(cities=[]):
@@ -34,8 +44,11 @@ def cityreader(cities=[]):
         csvreader = csv.reader(csvfile)
         next(csvreader)
 
-        for city in csvreader:
-            cities.append(City(city[0], float(city[3]), float(city[4])))
+        for i, city in enumerate(csvreader):
+            formatCity(city)
+            name, lat, lon = formatedCities[i]["name"], float(
+                formatedCities[i]["lat"]), float(formatedCities[i]["lon"])
+            cities.append(City(name, lat, lon))
     return cities
 
 
