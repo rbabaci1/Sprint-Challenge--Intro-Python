@@ -35,6 +35,15 @@ def formatCity(city):
     formatedCities.append(temp)
 
 
+def getLowLatHighLon(lat1, lat2, lon1, lon2):
+    lowestLat, highestLon = lat1, lon1
+    if lat1 > lat2:
+        lowestLat = lat2
+    if lon1 < lon2:
+        highestLon = lon2
+    return [lowestLat, highestLon]
+
+
 def cityreader(cities=[]):
     # TODO Implement the functionality to read from the 'cities.csv' file
     # Ensure that the lat and lon valuse are all floats
@@ -54,8 +63,8 @@ def cityreader(cities=[]):
 
 cityreader(cities)
 # Print the list of cities (name, lat, lon), 1 record per line.
-for c in cities:
-    print(f"City_name: {c.name}, Lat: {c.lat}, Lon: {c.lon}")
+# for c in cities:
+#     print(f"City_name: {c.name}, Lat: {c.lat}, Lon: {c.lon}")
 
 # STRETCH GOAL!
 #
@@ -87,11 +96,14 @@ for c in cities:
 # Salt Lake City: (40.7774,-111.9301)
 
 # TODO Get latitude and longitude values from the user
+point1 = input("Enter lat1, lon1:\n>>> ")
+point2 = input("Enter lat2, lon2:\n>>> ")
 
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
     within = []
+    lowestLat, highestLon = 0
 
     # Go through each city and check to see if it falls within
     # the specified coordinates.
