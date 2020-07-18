@@ -93,7 +93,7 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # the specified coordinates.
     for city in cities:
         if lat1 <= abs(city.lat) <= lat2 and lon1 <= abs(city.lon) <= lon2:
-            within.append(f"{city.name}: {city.lat, city.lon}")
+            within.append(city)
     return within
 
 
