@@ -35,7 +35,7 @@ def cityreader(cities=[]):
         next(csvreader)
 
         for city in csvreader:
-            cities.append(City(city[0], city[3], city[4]))
+            cities.append(City(city[0], float(city[3]), float(city[4])))
     return cities
 
 
