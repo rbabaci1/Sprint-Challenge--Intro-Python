@@ -28,7 +28,7 @@ class City:
 cities = []
 
 
-def sortInputs(lat1, lon1, lat2, lon2):
+def sortCoordinates(lat1, lon1, lat2, lon2):
     lats = sorted([lat1, lat2])
     lons = sorted([lon1, lon2])
     return lats + lons
@@ -50,8 +50,8 @@ def cityreader(cities=[]):
 
 cityreader(cities)
 # Print the list of cities (name, lat, lon), 1 record per line.
-# for c in cities:
-#     print(f"City_name: {c.name}, Lat: {c.lat}, Lon: {c.lon}")
+[print(c) for c in cities]
+
 
 # STRETCH GOAL!
 #
@@ -90,7 +90,7 @@ lat2, lon2 = input("Enter lat2,lon2:\n>>> ").split(",")
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
     within = []
-    lat1, lat2, lon1, lon2 = sortInputs(
+    lat1, lat2, lon1, lon2 = sortCoordinates(
         abs(lat1), abs(lon1), abs(lat2), abs(lon2))
     # Go through each city and check to see if it falls within
     # the specified coordinates.
@@ -103,5 +103,4 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
 matchedCities = cityreader_stretch(
     float(lat1), float(lon1), float(lat2), float(lon2), cities)
 
-for m in matchedCities:
-    print(m)
+[print(m) for m in matchedCities]
