@@ -9,6 +9,9 @@ class City:
         self.lat = lat
         self.lon = lon
 
+    def __str__(self):
+        return f"{self.name}: ({self.lat},{self.lon})"
+
 
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
@@ -80,8 +83,8 @@ cityreader(cities)
 # Salt Lake City: (40.7774,-111.9301)
 
 # TODO Get latitude and longitude values from the user
-point1 = input("Enter lat1,lon1:\n>>> ").split(",")
-point2 = input("Enter lat2,lon2:\n>>> ").split(",")
+lat1, lon1 = input("Enter lat1,lon1:\n>>> ").split(",")
+lat2, lon2 = input("Enter lat2,lon2:\n>>> ").split(",")
 
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
@@ -98,6 +101,7 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
 
 
 matchedCities = cityreader_stretch(
-    float(point1[0]), float(point1[1]), float(point2[0]), float(point2[1]), cities)
+    float(lat1), float(lon1), float(lat2), float(lon2), cities)
 
-print(matchedCities)
+for m in matchedCities:
+    print(m)
