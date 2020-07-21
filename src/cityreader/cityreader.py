@@ -25,7 +25,6 @@ class City:
 #
 # Note that the first line of the CSV is header that describes the fields--this
 # should not be loaded into a City object.
-cities = []
 
 
 def sortCoordinates(lat1, lon1, lat2, lon2):
@@ -48,7 +47,7 @@ def cityreader(cities=[]):
     return cities
 
 
-cityreader(cities)
+cities = cityreader()
 # Print the list of cities (name, lat, lon), 1 record per line.
 [print(c) for c in cities]
 
